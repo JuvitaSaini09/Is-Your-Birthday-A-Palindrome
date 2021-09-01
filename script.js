@@ -1,3 +1,8 @@
+const buttonTocheckPalindrome=document.querySelector("#check-btn")
+const bdayDate=document.querySelector("#bday-date")
+const result=document.querySelector("#result")
+
+
 function Ispalindrome(stringg) {
     var strSplitted = stringg.split('');
     var strReversed = strSplitted.reverse();
@@ -7,9 +12,9 @@ function Ispalindrome(stringg) {
 
 
     var date = {
-    day: 15,
-    month: 7,
-    year: 2024
+    day: 31,
+    month: 1,
+    year: 2020
 }
 
 
@@ -125,11 +130,35 @@ function calculateNextDate(date) {
         }
 
     }
-    console.log(calculateNextDate(date));
-    
-    //
-    //const dateInStringType = dateToString(date);
-    //const allFormatOfDate = CombineDateInAllFormat(dateInStringType);
-    //const Is_All_formatDate_A_palindrome=IsAllFormatsOfDateAPalindrome(date)
+    function findNextPalindromeDate(date){
+        var count=0;
+        var nextdate=calculateNextDate(date);
+        while(1){
+            count++;
+           if(IsAllFormatsOfDateAPalindrome(nextdate))
+           {
+               break;
+           }
+           nextdate=calculateNextDate(nextdate);
+        }
+      return [count,nextdate];
+    }
 
+    function OnclickHandler()
+        {   result.style.display="none"
+            if((bdayDate.value)!==''){
+                console.log(bdayDate.value)
+                /*
+                var NextPalindromeDate=(findNextPalindromeDate(bdayDate));
+    console.log(NextPalindromeDate[0])
+    console.log(NextPalindromeDate[1])
+    */
+
+            }
+            else{
+                result.style.display="block"
+                result.innerText="Enter a date !!"
+            }
+        }
     
+    buttonTocheckPalindrome.addEventListener("click",OnclickHandler)
