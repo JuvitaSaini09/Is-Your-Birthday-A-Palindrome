@@ -6,10 +6,10 @@ function Ispalindrome(stringg) {
 }
 
 
-var date = {
-    day: 31,
-    month: 12,
-    year: 2020
+    var date = {
+    day: 15,
+    month: 7,
+    year: 2024
 }
 
 
@@ -110,11 +110,13 @@ function calculateNextDate(date) {
         month = 1;
         year++;
 
-    } else {
+    }
+     else {
         if (day > daysInMonth[month - 1]) {
             day = 1;
             month++;
         }
+    }
 
         return {
             day: day,
