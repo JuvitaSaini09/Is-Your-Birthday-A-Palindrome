@@ -6,7 +6,7 @@ function Ispalindrome(stringg) {
 }
 
 
-date = {
+var date = {
     day: 31,
     month: 12,
     year: 2020
@@ -69,9 +69,8 @@ function IsAllFormatsOfDateAPalindrome(date) {
     return flag;
 }
 
-function isLeapYear(date) {
+function isLeapYear(year) {
 
-    var year = date.year;
     if (year % 400 === 0)
         return true;
 
@@ -111,36 +110,24 @@ function calculateNextDate(date) {
         month = 1;
         year++;
 
-    }
-    else {
-        if (day>daysInMonth[month - 1]) {
-            day=1;
+    } else {
+        if (day > daysInMonth[month - 1]) {
+            day = 1;
             month++;
-        } 
+        }
 
-    return {
-        day: day,
-        month: month,
-        year: year
+        return {
+            day: day,
+            month: month,
+            year: year
+        }
+
     }
+    console.log(calculateNextDate(date));
+    
+    //
+    //const dateInStringType = dateToString(date);
+    //const allFormatOfDate = CombineDateInAllFormat(dateInStringType);
+    //const Is_All_formatDate_A_palindrome=IsAllFormatsOfDateAPalindrome(date)
 
-}
-
-
-
-
-
-
-
-
-
-
-
-
-console.log(calculateNextDate(date));
-
-/*
-const dateInStringType = dateToString(date);
-const allFormatOfDate = CombineDateInAllFormat(dateInStringType);
-const Is_All_formatDate_A_palindrome=IsAllFormatsOfDateAPalindrome(date);
-
+    
