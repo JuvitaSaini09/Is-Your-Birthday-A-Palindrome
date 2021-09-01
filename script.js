@@ -147,7 +147,8 @@ function calculateNextDate(date) {
     function OnclickHandler()
         {   result.style.display="none"
             if((bdayDate.value)!==''){
-                console.log(bdayDate.value)
+                result.style.display="block"
+                result.innerText=bdayDate.value;
                 /*
                 var NextPalindromeDate=(findNextPalindromeDate(bdayDate));
     console.log(NextPalindromeDate[0])
@@ -157,7 +158,7 @@ function calculateNextDate(date) {
             }
             else{
                 result.style.display="block"
-                result.innerText="Enter a date !!"
+                result.innerText="Select a date !!"
             }
         }
     
