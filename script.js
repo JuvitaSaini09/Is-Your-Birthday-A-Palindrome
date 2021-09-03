@@ -1,6 +1,6 @@
-const buttonTocheckPalindrome=document.querySelector("#check-btn")
-const bdayDate=document.querySelector("#bday-date")
-const result=document.querySelector("#result")
+const buttonTocheckPalindrome = document.querySelector("#check-btn")
+const bdayDate = document.querySelector("#bday-date")
+const result = document.querySelector("#result")
 
 
 function Ispalindrome(stringg) {
@@ -9,17 +9,6 @@ function Ispalindrome(stringg) {
     var strjoined = strReversed.join('');
     return stringg === strjoined;
 }
-
-
-    var date = {
-    day: 31,
-    month: 1,
-    year: 2020
-}
-
-
-
-
 
 function dateToString(dateToString) {
     var array = {
@@ -115,51 +104,134 @@ function calculateNextDate(date) {
         month = 1;
         year++;
 
-    }
-     else {
+    } else {
         if (day > daysInMonth[month - 1]) {
             day = 1;
             month++;
         }
     }
 
-        return {
-            day: day,
-            month: month,
-            year: year
-        }
-
-    }
-    function findNextPalindromeDate(date){
-        var count=0;
-        var nextdate=calculateNextDate(date);
-        while(1){
-            count++;
-           if(IsAllFormatsOfDateAPalindrome(nextdate))
-           {
-               break;
-           }
-           nextdate=calculateNextDate(nextdate);
-        }
-      return [count,nextdate];
+    return {
+        day: day,
+        month: month,
+        year: year
     }
 
-    function OnclickHandler()
-        {   result.style.display="none"
-            if((bdayDate.value)!==''){
-                result.style.display="block"
-                result.innerText=bdayDate.value;
-                /*
-                var NextPalindromeDate=(findNextPalindromeDate(bdayDate));
-    console.log(NextPalindromeDate[0])
-    console.log(NextPalindromeDate[1])
-    */
+}
+function findNextPalindromeDate(date) {
+    var count = 0;
+    var nextdate = calculateNextDate(date);
+    while (1) {
+        count++;
+        if (IsAllFormatsOfDateAPalindrome(nextdate)) {
+            break;
+        }
+        nextdate = calculateNextDate(nextdate);
+    }
+    return [count, nextdate];
+}
 
-            }
-            else{
-                result.style.display="block"
-                result.innerText="Select a date !!"
+
+function calculatePreviousDate(date) {
+
+    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]//0-11
+    var day = date.day;
+    var month = date.month;
+    var year = date.year;
+    day--;
+
+    if (month === 3) {
+
+        if (isLeapYear(year)) {
+            if (day===0) {
+                day = 29;
+                month = 2;
             }
         }
-    
-    buttonTocheckPalindrome.addEventListener("click",OnclickHandler)
+    }
+     else if (month === 1) {
+         if(day===0){
+        day = 31;
+        month = 12;
+        year--;
+         }
+
+    } else {
+        if (day===0) {
+            day = daysInMonth[month-2];
+            month--;
+        }
+    }
+
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
+
+}
+function findPreviousPalindromeDate(date) {
+    var count = 0;
+    var prevdate = calculatePreviousDate(date);
+    while (1) {
+        count++;
+        if (IsAllFormatsOfDateAPalindrome(prevdate)) {
+            break;
+        }
+        prevdate = calculatePreviousDate(prevdate);
+    }
+    return [count, prevdate];
+}
+
+
+function OnclickHandler() {
+    result.style.display = "none"
+    if ((bdayDate.value) !== '') {
+        result.style.display = "block"
+        result.innerText = bdayDate.value;
+        var date = bdayDate.value.split('-')
+        var yyyy = Number(date[0]);
+        var mm = Number(date[1]);
+        var dd = Number(date[2]);
+        var date = {
+            day: dd,
+            month: mm,
+            year: yyyy
+        }
+        if (IsAllFormatsOfDateAPalindrome(date)) {
+            result.style.display = "block"
+            result.innerText = "Yay,Your birthday is palindrome!!"
+        } else {
+
+            var PreviousPalindromeDate = (findPreviousPalindromeDate(date));
+            var previousDate =PreviousPalindromeDate[1]
+            var ctr2 = PreviousPalindromeDate[0]
+
+            var NextPalindromeDate = (findNextPalindromeDate(date));
+            var NextDate = NextPalindromeDate[1]
+            var ctr1 = NextPalindromeDate[0]
+
+            if(ctr1<ctr2){
+            var counter = `The  nearest palindrome date is ${NextDate.day}-${NextDate.month}-${NextDate.year}, you missed by ${ctr1} days.`;
+            result.style.display = "block"
+            result.innerText = counter;
+            }
+                else{
+                    var counter = `The  nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed by ${ctr2} days.`;
+                    result.style.display = "block"
+                    result.innerText = counter;
+
+
+                }
+
+            
+        }
+
+
+    } else {
+        result.style.display = "block"
+        result.innerText = "Select a date !!"
+    }
+}
+
+buttonTocheckPalindrome.addEventListener("click", OnclickHandler)
