@@ -118,6 +118,7 @@ function calculateNextDate(date) {
     }
 
 }
+
 function findNextPalindromeDate(date) {
     var count = 0;
     var nextdate = calculateNextDate(date);
@@ -134,7 +135,7 @@ function findNextPalindromeDate(date) {
 
 function calculatePreviousDate(date) {
 
-    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]//0-11
+    var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31] //0-11
     var day = date.day;
     var month = date.month;
     var year = date.year;
@@ -143,22 +144,21 @@ function calculatePreviousDate(date) {
     if (month === 3) {
 
         if (isLeapYear(year)) {
-            if (day===0) {
+            if (day === 0) {
                 day = 29;
                 month = 2;
             }
         }
-    }
-     else if (month === 1) {
-         if(day===0){
-        day = 31;
-        month = 12;
-        year--;
-         }
+    } else if (month === 1) {
+        if (day === 0) {
+            day = 31;
+            month = 12;
+            year--;
+        }
 
     } else {
-        if (day===0) {
-            day = daysInMonth[month-2];
+        if (day === 0) {
+            day = daysInMonth[month - 2];
             month--;
         }
     }
@@ -170,6 +170,7 @@ function calculatePreviousDate(date) {
     }
 
 }
+
 function findPreviousPalindromeDate(date) {
     var count = 0;
     var prevdate = calculatePreviousDate(date);
@@ -204,27 +205,27 @@ function OnclickHandler() {
         } else {
 
             var PreviousPalindromeDate = (findPreviousPalindromeDate(date));
-            var previousDate =PreviousPalindromeDate[1]
+            var previousDate = PreviousPalindromeDate[1]
             var ctr2 = PreviousPalindromeDate[0]
 
             var NextPalindromeDate = (findNextPalindromeDate(date));
             var NextDate = NextPalindromeDate[1]
             var ctr1 = NextPalindromeDate[0]
 
-            if(ctr1<ctr2){
-            var counter = `The  nearest palindrome date is ${NextDate.day}-${NextDate.month}-${NextDate.year}, you missed by ${ctr1} days.`;
-            result.style.display = "block"
-            result.innerText = counter;
+            if (ctr1 < ctr2) {
+                var counter = `The  nearest palindrome date is ${NextDate.day}-${NextDate.month}-${NextDate.year}, you missed by ${ctr1} days.`;
+                result.style.display = "block"
+                result.innerText = counter;
+            } else {
+                var counter = `The  nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed by ${ctr2} days.`;
+
+                result.style.display = "block"
+                result.innerText = counter;
+
+
             }
-                else{
-                    var counter = `The  nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed by ${ctr2} days.`;
-                    result.style.display = "block"
-                    result.innerText = counter;
 
 
-                }
-
-            
         }
 
 
