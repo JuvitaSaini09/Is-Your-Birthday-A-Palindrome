@@ -1,6 +1,8 @@
 const buttonTocheckPalindrome = document.querySelector("#check-btn")
 const bdayDate = document.querySelector("#bday-date")
 const result = document.querySelector("#result")
+const loadingImage=document.querySelector("#loading-image");
+loadingImage.style.display="none";
 
 function Ispalindrome(stringg) {
     var strSplitted = stringg.split('');
@@ -184,11 +186,13 @@ function OnclickHandler() {
     }
     if ((bdayDate.value) !== '') {
         
-        
+        loadingImage.style.display="block";
+        setTimeout(()=> {
+            loadingImage.style.display = "none";
         if (IsAllFormatsOfDateAPalindrome(date)) {
             result.style.display = "block"
             result.style.color =" rgb(39, 11, 66)";
-            result.innerText = "Yay,Your birthday is palindrome!!"
+            result.innerText = "Yay,Your birthday is palindrome :-)!!"
         } else {
 
             var PreviousPalindromeDate = (findPreviousPalindromeDate(date));
@@ -199,21 +203,24 @@ function OnclickHandler() {
             var ctr1 = NextPalindromeDate[0];
 
             if (ctr1 < ctr2) {
+                loadingImage.style.display="none";
                 var counter = `The  nearest palindrome date is ${NextDate.day}-${NextDate.month}-${NextDate.year}, you missed by ${ctr1} days.`;
                 result.style.display = "block"
                 result.style.color =" rgb(39, 11, 66)";
                 result.innerText = counter;
             } else {
-                var counter = `The  nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed by ${ctr2} days.`;
+                loadingImage.style.display="none";
+                var counter = `The  nearest palindrome date is ${previousDate.day}-${previousDate.month}-${previousDate.year}, you missed by ${ctr2} days :-( `;
                 result.style.display = "block"
                 result.style.color =" rgb(39, 11, 66)";
                 result.innerText = counter;
             }
-        }
+        }},3000);
     } else {
         result.style.display = "block"
         result.style.color = "red"
         result.innerText = "Select a date !!"
     }
 }
+
 buttonTocheckPalindrome.addEventListener("click", OnclickHandler)
